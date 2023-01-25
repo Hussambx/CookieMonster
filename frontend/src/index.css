@@ -3,68 +3,65 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  background-color: #efefef;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+*{
   margin: 0;
+  padding: 0;
+}
+h2{
+  color: black;
+  text-align: center;
+  padding-top: 15px;
+}
+nav{
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  border: rgb(230, 230, 230);
+  border-style: solid;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-width: thin;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-around;
+  gap:20%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+img{
+  width: 60px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.placeholder{
+  background-color: transparent;
+  border-bottom: none;
+  border-top: none;
+  height: 100%; 
+  border-right: none;
+  width: 50%;
+  border-color: rgb(230, 230, 230);
+  border-width: thin;
+  font-size: medium;
+  max-width: 300px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+
+#navleft{
+  display: flex;
+  width: 40%;
+}
+
+#navright{
+  display: flex;
+  justify-self: right;
+  width: 40%;
+  justify-content: right;
 }
