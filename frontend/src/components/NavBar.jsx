@@ -5,7 +5,7 @@ export default function NavBar(){
         <>
         <nav>
             <div id ="navleft">
-            <img src={logo}></img>
+            <img src={logo} id="logo"></img>
             <h2>Cookie Monster</h2>
             </div>
            <div id="navright">

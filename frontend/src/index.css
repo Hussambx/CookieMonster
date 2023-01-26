@@ -2,10 +2,10 @@
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
+  
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #efefef;
+  background-color: #f8f8f8;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -36,7 +36,7 @@ nav{
   gap:20%;
 }
 
-img{
+.logo{
   width: 60px;
 }
 
@@ -64,4 +64,52 @@ img{
   justify-self: right;
   width: 40%;
   justify-content: right;
+}
+
+#largetext{
+  font-size: 3vmax;
+  text-align: center;
+  margin-top: 40px;
+}
+
+#mainoption{
+  display: flex;
+  margin-top: 40px;
+  gap: 20px;
+  justify-content: center;
+}
+
+h4{
+  text-align: center;
+  color: black;
+  font-size: x-large;
+}
+
+h5{
+  text-align: center;
+  color: black;
+  font-size: medium;
+}
+
+#largeicon{
+  width: 16vmax;
+}
+
+#largeicon:hover{
+  width: 17vmax;
+}
+
+#smallicon{
+  width: 11vmax;
+}
+
+#smallicon:hover{
+  width: 12vmax;
+}
+
+#secondaryoptions{
+  display: flex;
+  margin-top: 40px;
+  gap:20px;
+  justify-content: center;
 }
