@@ -6,12 +6,23 @@ import giftcard from '../assets/gift.png';
 import catering from '../assets/cookies.png';
 import extraitems from '../assets/catering.png';
 export default function Mainmenu(props){
+        //When Cookie Icon Is Clicked switchs to secondary menu containg cookie box options
+    function cookiemenu(){
+        props.handleClick(0);
+    }
+    //When Drink Icon is clicked switchs to secondary menu containing drink options 
+    function drinkmenu(){
+        props.handleClick(1);
+    }
+
+
+
     return(
         <>
         <h2 id="largetext">What would you like today?</h2>
         <div id="mainoption">
             <section>
-            <img src={cookie} id="largeicon" ></img>
+            <img src={cookie} id="largeicon" onClick={cookiemenu} ></img>
             <h4>Cookies</h4>
             </section>
             <section>
@@ -24,7 +35,7 @@ export default function Mainmenu(props){
 
         <div id ="secondaryoptions">
         <section>
-        <img src={drinks} id="smallicon"></img>
+        <img src={drinks} id="smallicon" onClick={drinkmenu}></img>
         <h5>Drinks</h5>
         </section>
         <section>

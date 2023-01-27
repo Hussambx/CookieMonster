@@ -85,7 +85,7 @@ h4{
   font-size: x-large;
 }
 
-h5{
+h5,h6{
   text-align: center;
   color: black;
   font-size: medium;
@@ -112,4 +112,27 @@ h5{
   margin-top: 40px;
   gap:20px;
   justify-content: center;
+}
+
+#rows{
+  margin-top: 60px;
+  gap: 20px ;
+  display: flex;
+  justify-content: center;
+}
+
+#rows>section>img{
+  width: 11vmax;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+#rows>section>img:hover{
+  width: 12vmax;
+}
+
+h6{
+  font-size: small;
+  font-style: italic;
 }
