@@ -4,10 +4,17 @@ import fourcookie from '../assets/4cookiegoodxt.png'
 import sixcookie from '../assets/6cookiegoodxt.png'
 import twelvecookie from '../assets/12cookiegoodxt.png'
 export default function Secondmenu(props){
+
+    function boxclicked(){
+        props.onClick(props.id)
+    }
+
+
     return(
+        
         <>
             <section>
-            <img src={props.img}></img>
+            <img src={props.img} onClick={boxclicked}></img>
             <h5>{props.name}</h5>
             <h6>{props.desc}</h6>
             <h5>{props.price}</h5>

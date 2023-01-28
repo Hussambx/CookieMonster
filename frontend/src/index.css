@@ -136,3 +136,17 @@ h6{
   font-size: small;
   font-style: italic;
 }
+
+#cookieoption{
+  display: flex;
+  justify-content: center;
+  gap:25px ;
+  margin-top: 25px;
+}
+
+.cookiepic{
+  width: 140px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
