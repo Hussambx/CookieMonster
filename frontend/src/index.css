@@ -142,11 +142,37 @@ h6{
   justify-content: center;
   gap:25px ;
   margin-top: 25px;
+  flex-wrap: wrap;
 }
 
 .cookiepic{
-  width: 140px;
+  width: 8vmax;
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+#boxlayout{
+  margin: auto;
+  height: 8vmax;
+  margin-top: 50px;
+  width: 10vmax;
+  display: flex;
+  justify-content: left;
+  border-color: pink;
+  border-style: solid;
+  border-bottom-width: 1vmax;
+  flex-wrap: wrap;
+  overflow:hidden;
+}
+
+#boxlayout>img{
+  width: 6vmax;
+  height: 6vmax;
+  overflow:scroll;
+}
+
+#desc{
+  color:grey;
+  margin-top: 15px;
 }
