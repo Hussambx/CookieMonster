@@ -152,6 +152,10 @@ h6{
   margin-right: auto;
 }
 
+.cookiepic:hover{
+  width: 8.7vmax;
+}
+
 #boxlayout{
   margin: auto;
   height: 8vmax;
@@ -175,4 +179,44 @@ h6{
 #desc{
   color:grey;
   margin-top: 15px;
+}
+
+.counter{
+  display: flex;
+  justify-content: center;
+  gap:15px;
+}
+.counter>h5{
+  margin-top: 9px;
+}
+.dot{
+  height: 40px;
+  width: 40px;
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(151, 133, 133);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: xx-large;
+  font-family:  Helvetica, sans-serif;
+}
+.addtocart{
+  margin-top: 25px;
+  height: 90px;
+  width: 90px;
+  background-color: rgb(0, 0, 0);
+  border-color: rgb(255, 255, 255);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: large;
+  color:white;
+  justify-self: center;
+  font-family:  Helvetica, sans-serif;
+  
+}
+.addtocart:hover{
+  background-color: rgb(29, 29, 29);
 }
