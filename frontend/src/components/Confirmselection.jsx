@@ -38,7 +38,7 @@ export default function Confirmselection(props){
         <button className="dot" onClick={addCount}>+</button>
         </div>
         <div className="counter"> 
-      {props.sizeofbox!=12 &&  <button className="addtocart" onClick={upgradebox}>UPGRADE BOX</button>}
+      {props.sizeofbox!=12 && props.uiscreen!=4 &&  <button className="addtocart" onClick={upgradebox}>UPGRADE BOX</button>}
         <button className="addtocart" onClick={addtocart}>ADD TO BAG</button>
         
         </div>

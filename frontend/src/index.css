@@ -201,6 +201,11 @@ h6{
   font-size: xx-large;
   font-family:  Helvetica, sans-serif;
 }
+
+.dot:hover{
+  background-color: rgb(214, 214, 214);
+}
+
 .addtocart{
   margin-top: 25px;
   height: 90px;
@@ -213,10 +218,11 @@ h6{
   display: inline-block;
   font-size: large;
   color:white;
-  justify-self: center;
   font-family:  Helvetica, sans-serif;
   
 }
 .addtocart:hover{
-  background-color: rgb(29, 29, 29);
+  background-color: rgb(59, 58, 58);
 }
+
+

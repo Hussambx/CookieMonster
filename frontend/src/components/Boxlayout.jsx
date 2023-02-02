@@ -11,7 +11,7 @@ export default function Boxlayout(props){
     //Conditonal Rendering+ Conditional Statements to adjust dimensions of objects:
     return(
         <>
-        <div id="boxlayout" style={{width:props.size==1?'10vmax':props.size==12?'38vmax':props.size==6?'20vmax':'25vmax',height:props.size<=4?'8vmax':'12vmax'}} > 
+        <div id="boxlayout" style={{width:props.size==1?'10vmax':props.size==12?'38vmax':props.size==6?'20vmax':'25vmax',height:props.size<=4?'8vmax':'12vmax',justifyContent:props.size<=2?'center':'left'}} > 
         {cloneofarray.length>=2 && <img src={props.data[1].img} onClick={removecookie} name={props.data[1].index} style={{width:props.size==1?'8vmax':'6.4vmax',height:props.size==1?'8vmax':'6.4vmax'}}></img>}
         {props.size>=4 && cloneofarray.length>=3 && <img src={props.data[2].img} onClick={removecookie} name={props.data[2].index}></img>}
         {props.size>=4 && cloneofarray.length>=4 && <img src={props.data[3].img} onClick={removecookie} name={props.data[3].index}></img>}

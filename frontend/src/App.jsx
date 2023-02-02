@@ -8,22 +8,24 @@ import cookietypes from './data/cookieoptions'
 import Cookiemenu from './components/Cookiemenu'
 import Boxlayout from './components/Boxlayout'
 import Confirmselection from './components/Confirmselection'
+import drinkoptions from './data/drinkoptions'
 function App() {
-  const [activeui, setUi] = useState(0);  //Zero =Main Menu, 1=Secondary Menu, 2 = Cookie Menu, 3=Drink Screen 
+  const [activeui, setUi] = useState(0);  //Zero =Main Menu, 1=Secondary Menu Cookies, 2 = Cookie Menu, 3=Seconday Menu Drinks, 3=Drink Screen 
   const [boxsize,setSize] = useState(1);  //Keeps track of selected cookie box sizes, Options: 1,4,6,12
   const[cookielayout,setLayout] = useState([]); //Keeps track of the cookie box layout (Which cookies are in the given box + Order Of Them Left To Right),  this is only temp and once layout is confirmed list will be pushed to cart 
   const [drawerState, setDrawerState] = useState(false);   //This is used to force re-render Boxlayout element 
   const[cart,setCart] = useState([]); //This state keeps track of the persons cart(Items that they have addded to the order so far )
+  const[drink,setDrink] = useState(''); //This state keeps track of the selected drink IMG 
   var tempclone;
   var tempclone2;
   //Keeps track of what UI element should be displayed 
   function changeview(num){
-    setUi(prevstate=>1)
+    num==0?setUi(prevstate=>1):setUi(prevstate=>3)
    // num==1?console.log(secmenu):console.log(secmenu)
   }
 
   //Keeps track of box size that is selected, and changes ui to cookie menu 
-  function cookieboxsize(num,name,price){
+  function cookieboxsize(num,name,price,img){
     setUi(prevstate=>2)
     setSize(prevstate=>num)
     var a= [{name:name,price:price,index:0,quantity:1}] //Sets the name of the box + price 
@@ -60,7 +62,7 @@ function App() {
     //This function is called when a customer has confirmed there selection, the selection is then added to the customers cart 
     function addtocart(quantityx){
       //Update the quanity field to the given quanity by the end of the counter, will then push cookielayout state into cart state
-      if(activeui==2){
+      if(activeui==2 || activeui==4){
         tempclone = cookielayout
         tempclone[0].quantity = quantityx
         setLayout(prevstate=>tempclone)
@@ -79,6 +81,15 @@ function App() {
       boxsize==1?setSize(prevstate=>4):boxsize==4?setSize(prevstate=>6):setSize(prevstate=>12)
     }
 
+    //Function called when a drink is selected
+    //1 = water, 2=cho milk, 3 = milk 
+    function pickedDrink(id,name,price,img){
+      var a= [{name:name,price:price,index:0,quantity:1,img:img}] //Sets the name of the drink 
+    setLayout(prevstate=>a); 
+    setDrink(prevstate=>img)
+    setUi(prevstate=>4)
+      
+    }
 
   //Props Compo for the cookie box types (sizes)
   const cookiebox =cookieboxdata.map(cookieboxdata=>{
@@ -110,6 +121,20 @@ function App() {
 
   })
 
+  //Props compo for the drinks options 
+  const drinkmenu =drinkoptions.map(drinkoptions=>{
+    return(
+      <Secondmenu
+      name ={drinkoptions.name}
+      desc = {drinkoptions.desc}
+      price = {drinkoptions.price}
+      img = {drinkoptions.img}
+      id ={drinkoptions.id}
+      key = {drinkoptions.id}
+      onClick = {pickedDrink}
+      />
+    )
+  })
   return (
     <>
     
@@ -118,6 +143,7 @@ function App() {
     {activeui ==1 && <h2 id='largetext'>Cookies</h2>}
     <div id="rows">
     {activeui ==1 && cookiebox}
+    {activeui==3 && drinkmenu}
       </div>
       {activeui==2 &&  boxsize-cookielayout.length+1>0 && <h2 id='largetext'>Pick Cookies For Your Box</h2>}
       {activeui==2 &&  boxsize-cookielayout.length+1==0 &&<h2 id='largetext'>How does this look?</h2>}
@@ -132,11 +158,12 @@ function App() {
       <div id="cookieoption">
       {activeui==2 && boxsize-cookielayout.length+1>0 &&cookieoptions}
         </div>
+        {activeui==4 && <img src={drink} style={{width:'200px',display:'block',marginLeft:'auto',marginRight:'auto'}}></img>}
         { boxsize-cookielayout.length+1==0 &&<Confirmselection
         tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize}
-        
-        
         />}
+        {activeui==4 && <Confirmselection
+        tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize} uiscreen={activeui}/>}
      
   
     </>
