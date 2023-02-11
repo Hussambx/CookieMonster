@@ -14,7 +14,7 @@ export default function Secondmenu(props){
             <img src={props.img} onClick={boxclicked}></img>
             <h5>{props.name}</h5>
             <h6>{props.desc}</h6>
-            <h5>{props.price}</h5>
+            <h5>${props.price}</h5>
             </section>
            
         </>

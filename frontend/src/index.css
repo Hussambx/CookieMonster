@@ -157,7 +157,7 @@ h6{
 }
 
 #boxlayout{
-  margin: auto;
+ 
   height: 8vmax;
   margin-top: 50px;
   width: 10vmax;
@@ -169,10 +169,10 @@ h6{
   flex-wrap: wrap;
   overflow:hidden;
 }
-
+/*  NORMALLY 6.2VMAX*/
 #boxlayout>img{
-  width: 6vmax;
-  height: 6vmax;
+  width: 5.5vmax;
+  height: 5.5vmax;
   overflow:scroll;
 }
 
@@ -226,3 +226,42 @@ h6{
 }
 
 
+.itemlist{
+  display: flex;
+  margin:auto;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  max-width: 35vmax;
+  height:16vmax;
+  gap:20px;
+  border-radius: 1%;
+  padding-bottom: 20px;
+  overflow: hidden;
+}
+
+.editthis{
+  margin: auto;
+  top:auto;
+  text-align:center;
+  padding-top: 50%;
+  font-size: 1.5vmax;
+}
+
+.area{
+  margin-left: auto;
+  padding-right: 10px;
+  right: 100%;
+
+}
+
+.subtotal{
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  max-width: 35vmax;
+  height: 4vmax;
+  margin-top: 0.4vmax;
+  border-radius: 3%;
+}

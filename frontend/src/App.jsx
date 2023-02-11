@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect, useTransition} from 'react'
 import reactLogo from './assets/react.svg'
 import NavBar from './components/NavBar'
 import Mainmenu from './components/Mainmenu'
@@ -9,18 +9,20 @@ import Cookiemenu from './components/Cookiemenu'
 import Boxlayout from './components/Boxlayout'
 import Confirmselection from './components/Confirmselection'
 import drinkoptions from './data/drinkoptions'
+import Checkout from './components/Checkout'
 function App() {
-  const [activeui, setUi] = useState(0);  //Zero =Main Menu, 1=Secondary Menu Cookies, 2 = Cookie Menu, 3=Seconday Menu Drinks, 3=Drink Screen 
+  const [activeui, setUi] = useState(0);  //Zero =Main Menu, 1=Secondary Menu Cookies, 2 = Cookie Menu, 3=Seconday Menu Drinks, 4=Drink Screen, 5=Checkout Screen  
   const [boxsize,setSize] = useState(1);  //Keeps track of selected cookie box sizes, Options: 1,4,6,12
   const[cookielayout,setLayout] = useState([]); //Keeps track of the cookie box layout (Which cookies are in the given box + Order Of Them Left To Right),  this is only temp and once layout is confirmed list will be pushed to cart 
   const [drawerState, setDrawerState] = useState(false);   //This is used to force re-render Boxlayout element 
   const[cart,setCart] = useState([]); //This state keeps track of the persons cart(Items that they have addded to the order so far )
   const[drink,setDrink] = useState(''); //This state keeps track of the selected drink IMG 
+  const [subtotal,setSubtotal] = useState(0);//This state keeps track of the subtotal of the given order 
   var tempclone;
   var tempclone2;
   //Keeps track of what UI element should be displayed 
   function changeview(num){
-    num==0?setUi(prevstate=>1):setUi(prevstate=>3)
+    num==0?setUi(prevstate=>1):setUi(prevstate=>5)
    // num==1?console.log(secmenu):console.log(secmenu)
   }
 
@@ -135,6 +137,41 @@ function App() {
       />
     )
   })
+
+  //Props component for checkout screen 
+  const checkoutlist = cart.map(cartx=>{
+    return(
+      <Checkout
+      list ={cartx}
+      key={0}
+      size={cartx.length-1}
+      />
+    )
+  })
+
+  //useEfffect is used to keep track of subtotal of all the items in the customers cart 
+  useEffect(() => {
+    async function getSubtTotal() {
+      var g=0;
+     
+       for (var i=0; i<cart.length;i++){
+        g= g+ cart[i][0].price
+       }
+       console.log("The subtotal is:" +g);
+       g = (Math.round(g * 100) / 100).toFixed(2); //Rounds subtotal price to 2 decimal places 
+       setSubtotal(prevstate=>g)
+    }
+    getSubtTotal()
+}, [activeui])
+
+
+
+
+
+
+  //BASICALLY NEXT TIME YOU WORK ON THIS FIX THE LAYOUT OF THE SUBTOTAL SCREEN AND ADD A STATE TO KEEP TRACK OF IT
+  //ALSO   ADD THE CONFIRM ORDER BUTTON ONCE THIS IS COMPELETE THEN ALSO DO THE DRINKS PART FOR THIS
+  //then once thats done do testing and then start to work on the backend if you want you can push this to github at that stage just the frontend part and then work on the backend
   return (
     <>
     
@@ -160,12 +197,16 @@ function App() {
         </div>
         {activeui==4 && <img src={drink} style={{width:'200px',display:'block',marginLeft:'auto',marginRight:'auto'}}></img>}
         { boxsize-cookielayout.length+1==0 &&<Confirmselection
-        tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize}
+        tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize} incheckout={false}
         />}
         {activeui==4 && <Confirmselection
         tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize} uiscreen={activeui}/>}
-     
-  
+         {activeui==5 &&<h2 id='largetext' style={{marginBottom:'20px',marginTop:'0px'}}>Checkout</h2>}
+        {activeui==5 && checkoutlist}
+          {activeui==5 &&<div className='subtotal'>
+          <h4>Subtotal:</h4>
+          <h4>${subtotal}</h4>
+          </div>}
     </>
   )
 }
