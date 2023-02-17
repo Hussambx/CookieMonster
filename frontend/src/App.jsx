@@ -22,15 +22,16 @@ function App() {
   var tempclone2;
   //Keeps track of what UI element should be displayed 
   function changeview(num){
-    num==0?setUi(prevstate=>1):setUi(prevstate=>5)
+    setUi(prevstate=>num)
+    //num==0?setUi(prevstate=>1):setUi(prevstate=>5)
    // num==1?console.log(secmenu):console.log(secmenu)
   }
-
+  
   //Keeps track of box size that is selected, and changes ui to cookie menu 
   function cookieboxsize(num,name,price,img){
     setUi(prevstate=>2)
     setSize(prevstate=>num)
-    var a= [{name:name,price:price,index:0,quantity:1}] //Sets the name of the box + price 
+    var a= [{name:name,price:price,index:0,quantity:1,rd:Math.random()}] //Sets the name of the box + price 
     setLayout(prevstate=>a); 
   }
   console.log(cart);
@@ -70,7 +71,10 @@ function App() {
         setLayout(prevstate=>tempclone)
         console.log(cookielayout)
         tempclone2 = cart;
-        tempclone2.push(tempclone)
+        for(var x=0; x<quantityx; x++){
+          tempclone2.push(tempclone)
+        }
+        
         setCart(prevstate=>tempclone2)
         setLayout(prevstate=>[])
         setUi(prevstate=>0)
@@ -85,8 +89,8 @@ function App() {
 
     //Function called when a drink is selected
     //1 = water, 2=cho milk, 3 = milk 
-    function pickedDrink(id,name,price,img){
-      var a= [{name:name,price:price,index:0,quantity:1,img:img}] //Sets the name of the drink 
+    function pickedDrink(id,name,price,img,checkimg){
+      var a= [{name:name,price:price,index:0,quantity:1,img:img,rd:Math.random(),checkimg:checkimg}] //Sets the name of the drink 
     setLayout(prevstate=>a); 
     setDrink(prevstate=>img)
     setUi(prevstate=>4)
@@ -131,6 +135,7 @@ function App() {
       desc = {drinkoptions.desc}
       price = {drinkoptions.price}
       img = {drinkoptions.img}
+      checkimg={drinkoptions.checkimg}
       id ={drinkoptions.id}
       key = {drinkoptions.id}
       onClick = {pickedDrink}
@@ -145,6 +150,7 @@ function App() {
       list ={cartx}
       key={0}
       size={cartx.length-1}
+      removeitem={removefromcart}
       />
     )
   })
@@ -162,21 +168,41 @@ function App() {
        setSubtotal(prevstate=>g)
     }
     getSubtTotal()
-}, [activeui])
+}, [activeui,drawerState])
+
+  //This function removes the given item from the cart, this occurs during the checkout screen when the customer has the option to remove items from their cart 
+  function removefromcart(num){
+    for(var h =0; h<cart.length; h++){ //Each item within the array has a unique number, code loops through the list and searchs for the number 
+      if(cart[h][0].rd==num){
+        break;
+      }
+    }
+    tempclone =[];
+    //Using array.slice removes the given index out of the array 
+      tempclone = cart.slice(0,h).concat(cart.slice(h+1,cart.length))
+      setCart(prevstate=>tempclone)
+      console.log(tempclone);
+      console.log(cart)
+      setDrawerState(prevstate=>!prevstate)
+      if(tempclone.length==0){ //If no more items in cart then switchs back to main menu screen 
+        changeview(0)      
+      }
+   
+  }
+
+  //This function is called when the order is confirmed, as of right now it simply just clears the cart but once the backend is in place it will actually process the order
+  function orderConfirm(){
+    setCart(prevstate=>[])
+    changeview(0);
+    alert('Work In Progress; Once Backend is complete order will process. As of right now your cart will be cleared and you will be brought back to the main menu screen')
+  }
 
 
-
-
-
-
-  //BASICALLY NEXT TIME YOU WORK ON THIS FIX THE LAYOUT OF THE SUBTOTAL SCREEN AND ADD A STATE TO KEEP TRACK OF IT
-  //ALSO   ADD THE CONFIRM ORDER BUTTON ONCE THIS IS COMPELETE THEN ALSO DO THE DRINKS PART FOR THIS
-  //then once thats done do testing and then start to work on the backend if you want you can push this to github at that stage just the frontend part and then work on the backend
   return (
     <>
     
     <NavBar/>
-    {activeui==0 && <Mainmenu handleClick ={changeview}/>}
+    {activeui==0 && <Mainmenu handleClick ={changeview} currentcart={cart} />}
     {activeui ==1 && <h2 id='largetext'>Cookies</h2>}
     <div id="rows">
     {activeui ==1 && cookiebox}
@@ -197,7 +223,7 @@ function App() {
         </div>
         {activeui==4 && <img src={drink} style={{width:'200px',display:'block',marginLeft:'auto',marginRight:'auto'}}></img>}
         { boxsize-cookielayout.length+1==0 &&<Confirmselection
-        tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize} incheckout={false}
+        tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize} incheckout={false} 
         />}
         {activeui==4 && <Confirmselection
         tocart={addtocart} upgrade={upgradebox} sizeofbox={boxsize} uiscreen={activeui}/>}
@@ -207,6 +233,8 @@ function App() {
           <h4>Subtotal:</h4>
           <h4>${subtotal}</h4>
           </div>}
+          {activeui==5 &&<section className='justsection'><button className='checkoutbutton' onClick={orderConfirm}>Confrim Order</button></section>}
+          
     </>
   )
 }

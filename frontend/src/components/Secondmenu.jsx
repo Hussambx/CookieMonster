@@ -3,7 +3,12 @@ export default function Secondmenu(props){
     //Function is called when one of the box sizes are selected, this info is then passed back to app.jsx
     //This info is taken into consideration within Boxlayout.jsx  
     function boxclicked(){
-        props.onClick(props.id,props.name,props.price,props.img)
+        if (props.checkimg!=null){
+            props.onClick(props.id,props.name,props.price,props.img,props.checkimg)
+        }else{
+            props.onClick(props.id,props.name,props.price,props.img)
+        }
+       
     }
 
 

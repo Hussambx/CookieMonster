@@ -8,11 +8,14 @@ import extraitems from '../assets/catering.png';
 export default function Mainmenu(props){
         //When Cookie Icon Is Clicked switchs to secondary menu containg cookie box options
     function cookiemenu(){
-        props.handleClick(0);
+        props.handleClick(1);
     }
     //When Drink Icon is clicked switchs to secondary menu containing drink options 
     function drinkmenu(){
-        props.handleClick(1);
+        props.handleClick(3);
+    }
+    function checkoutmenu(){
+        props.handleClick(5)
     }
 
 
@@ -52,6 +55,10 @@ export default function Mainmenu(props){
         </section>
 
         </div>
+       {props.currentcart.length>0&& <div style={{display:'flex',justifyContent:'center',marginTop:'50px'}}>
+        <button className="checkoutbutton" onClick={checkoutmenu}>{props.currentcart.length} View Bag</button>
+        </div>
+}
         </>
     )
 }

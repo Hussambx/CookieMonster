@@ -262,6 +262,36 @@ h6{
   width: 100%;
   max-width: 35vmax;
   height: 4vmax;
-  margin-top: 0.4vmax;
+  margin-top: -0.1vmax;
   border-radius: 3%;
 }
+
+.subtotal>h4{
+  margin-top: 1.2vmax;
+  font-size: 1.5vmax;
+}
+
+.checkoutbutton{
+  margin-top: 10px;
+  width: 30vmax;
+  font-size: 2.4vmax;
+  border-radius: 20px;
+  background: white;
+  color: black;
+}
+
+.checkoutbutton:hover{
+  background: rgb(216, 216, 216);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.checkouticon{
+  width: 12vmax;
+  height: 12vmax;
+}
+
+.justsection{
+  justify-content: center;
+  display: flex;
+}
+
