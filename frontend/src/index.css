@@ -295,3 +295,10 @@ h6{
   display: flex;
 }
 
+.receipt{
+ justify-content: center;
+ display: flex;
+ gap:10px ;
+ flex-direction: column;
+}
+

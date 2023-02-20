@@ -10,8 +10,8 @@ export default function NavBar(){
             </div>
            <div id="navright">
            
-        <button class="placeholder">Nutrition Values</button>
-        <button class="placeholder">Loyality Points</button>
+        <button className="placeholder">Nutrition Values</button>
+        <button className="placeholder">Loyality Points</button>
            </div>
        
         </nav>

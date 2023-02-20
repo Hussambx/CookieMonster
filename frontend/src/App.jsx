@@ -1,5 +1,4 @@
 import { useState,useEffect, useTransition} from 'react'
-import reactLogo from './assets/react.svg'
 import NavBar from './components/NavBar'
 import Mainmenu from './components/Mainmenu'
 import Secondmenu from './components/Secondmenu'
@@ -18,8 +17,10 @@ function App() {
   const[cart,setCart] = useState([]); //This state keeps track of the persons cart(Items that they have addded to the order so far )
   const[drink,setDrink] = useState(''); //This state keeps track of the selected drink IMG 
   const [subtotal,setSubtotal] = useState(0);//This state keeps track of the subtotal of the given order 
+  const[ordernum,setNumber] = useState(0) //This state tracks the customers order number 
+  const delay = ms => new Promise(res => setTimeout(res, ms));; //Adds a delay 
   var tempclone;
-  var tempclone2;
+  var tempclone2
   //Keeps track of what UI element should be displayed 
   function changeview(num){
     setUi(prevstate=>num)
@@ -34,7 +35,6 @@ function App() {
     var a= [{name:name,price:price,index:0,quantity:1,rd:Math.random()}] //Sets the name of the box + price 
     setLayout(prevstate=>a); 
   }
-  console.log(cart);
   
   //Is Called when a cookie flavor is selected, adds the given cookie to the box 
   function pickedcookie(name,img,id){
@@ -59,7 +59,6 @@ function App() {
     prevstate.filter((cookiex)=>cookiex.index!=index)
     );
     setDrawerState(!drawerState); //Force Rerender 
-    console.log(cookielayout)
     }
 
     //This function is called when a customer has confirmed there selection, the selection is then added to the customers cart 
@@ -69,7 +68,6 @@ function App() {
         tempclone = cookielayout
         tempclone[0].quantity = quantityx
         setLayout(prevstate=>tempclone)
-        console.log(cookielayout)
         tempclone2 = cart;
         for(var x=0; x<quantityx; x++){
           tempclone2.push(tempclone)
@@ -163,7 +161,6 @@ function App() {
        for (var i=0; i<cart.length;i++){
         g= g+ cart[i][0].price
        }
-       console.log("The subtotal is:" +g);
        g = (Math.round(g * 100) / 100).toFixed(2); //Rounds subtotal price to 2 decimal places 
        setSubtotal(prevstate=>g)
     }
@@ -181,8 +178,6 @@ function App() {
     //Using array.slice removes the given index out of the array 
       tempclone = cart.slice(0,h).concat(cart.slice(h+1,cart.length))
       setCart(prevstate=>tempclone)
-      console.log(tempclone);
-      console.log(cart)
       setDrawerState(prevstate=>!prevstate)
       if(tempclone.length==0){ //If no more items in cart then switchs back to main menu screen 
         changeview(0)      
@@ -192,9 +187,36 @@ function App() {
 
   //This function is called when the order is confirmed, as of right now it simply just clears the cart but once the backend is in place it will actually process the order
   function orderConfirm(){
+    setNumber(prevstate=> Math.round(Math.random(0,100)*200))
+    newOrder();
     setCart(prevstate=>[])
-    changeview(0);
-    alert('Work In Progress; Once Backend is complete order will process. As of right now your cart will be cleared and you will be brought back to the main menu screen')
+    changeview(6);
+    alert("Order Confirmed, at the moment the employee facing front end is still not complete. Once that is complete you will be able to view your order from the employee's POV and view track other analytics about orders")
+  }
+
+  //Function is called when the customer hits the confirm order button, the order is then passed onto the backend where the data is then stored into the Mongo Db
+  async function newOrder(){
+    var m =false;
+    tempclone = cart;
+    const orderx = {order:cart,status:false,ordernum:ordernum}
+    const response = await fetch("https://cookiemonster.fly.dev/",{
+      method:'POST',
+      body: JSON.stringify(orderx),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const json = await response.json()
+            if(!response.ok){
+                console.log("An Error Occured Please Try Again Later")
+            }
+            if(response.ok){
+                //Resets state values as data was sent to db
+                setCart(prevstate=>[]);
+                changeview(6)
+                await delay(5000) //Waits 5 seconds then brought back to the main menu screen 
+                changeview(0)
+            }
   }
 
 
@@ -202,6 +224,7 @@ function App() {
     <>
     
     <NavBar/>
+   
     {activeui==0 && <Mainmenu handleClick ={changeview} currentcart={cart} />}
     {activeui ==1 && <h2 id='largetext'>Cookies</h2>}
     <div id="rows">
@@ -233,8 +256,12 @@ function App() {
           <h4>Subtotal:</h4>
           <h4>${subtotal}</h4>
           </div>}
-          {activeui==5 &&<section className='justsection'><button className='checkoutbutton' onClick={orderConfirm}>Confrim Order</button></section>}
-          
+          {activeui==5 &&<section className='justsection'><button className='checkoutbutton' onClick={orderConfirm}>Confirm Order</button></section>}
+          {activeui==6 &&<div className='receipt'>
+          <h2 id="largetext">Thanks for ordering!</h2>
+            <h2>Order Number:</h2>
+            <h2>#{ordernum}</h2>
+          </div>}
     </>
   )
 }
