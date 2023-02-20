@@ -20,11 +20,10 @@ app.use('/',Routes);
 
 mongoose.connect(process.env.MONG_URL)
 .then(()=>{
-    app.listen(process.env.PORT,()=>{
-        console.log("Im listening fam")
+    app.listen(8080,()=>{
+        console.log("Im listening")
         })
 })
 .catch((error)=>{
     console.log(error)
 })
-
