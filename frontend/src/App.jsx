@@ -9,6 +9,7 @@ import Boxlayout from './components/Boxlayout'
 import Confirmselection from './components/Confirmselection'
 import drinkoptions from './data/drinkoptions'
 import Checkout from './components/Checkout'
+//This JSX file will act as the main jsx file for the customer facing front end 
 function App() {
   const [activeui, setUi] = useState(0);  //Zero =Main Menu, 1=Secondary Menu Cookies, 2 = Cookie Menu, 3=Seconday Menu Drinks, 4=Drink Screen, 5=Checkout Screen  
   const [boxsize,setSize] = useState(1);  //Keeps track of selected cookie box sizes, Options: 1,4,6,12
