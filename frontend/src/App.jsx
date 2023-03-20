@@ -193,7 +193,7 @@ function App() {
     newOrder();
     setCart(prevstate=>[])
     changeview(6);
-    alert("Order Confirmed, at the moment the employee facing front end is still not complete. Once that is complete you will be able to view your order from the employee's POV and view track other analytics about orders")
+    alert("Order Confirmed: Please visit https://cookiemonste-r.netlify.app/employee to view employee POV")
   }
 
   //Function is called when the customer hits the confirm order button, the order is then passed onto the backend where the data is then stored into the Mongo Db
@@ -218,6 +218,7 @@ function App() {
                 changeview(6)
                 await delay(5000) //Waits 5 seconds then brought back to the main menu screen 
                 changeview(0)
+                setNumber(prevstate=>Math.round(Math.random(0,100)*200));
             }
   }
 

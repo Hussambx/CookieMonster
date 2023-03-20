@@ -302,3 +302,48 @@ h6{
  flex-direction: column;
 }
 
+
+
+.orderinfo{
+  display: flex ;
+  gap: 40px;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.orderinfo>button{
+  margin-top: 10px;
+  width: 200px;
+  font-size: xx-large;
+  border-radius: 7px;
+}
+
+.orderlist{
+display: flex;
+justify-content: center;
+
+}
+
+.updatestatus{
+  justify-self: center;
+  margin-top: 10px;
+  width: 17vmax;
+  font-size: 2.2vmax;
+  border-radius: 20px;
+  background: white;
+  color: black;
+}
+
+.updatestatus:hover{
+  background: rgb(179, 179, 179);
+}
+
+.testerx{
+  border-top: 1px;
+  border-style: solid;
+  border-color: black;
+  justify-content: center;
+  display: grid;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}

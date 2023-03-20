@@ -6,8 +6,10 @@ Part 1: Customer Facing Front-End; Allows customer to place order (Currently wor
 
 Part 2: Backend
 
-Part 3: Employee Facing Front End; View and manage customer orders as well as view data about customer orders (Most Popular Cookie etc..)
+Part 3: Employee Facing Front End; View and manage customer orders as well as view data about customer orders (Most Popular Cookie etc..) 
 
-Part 1 is currently complete: https://cookiemonste-r.netlify.app/
+Part 1 is currently complete (Customer Facing): https://cookiemonste-r.netlify.app/
 
-Work In Progress: PART 2 AND PART 3 WIP!!!  
+Part 3 WIP (Employee Facing): https://cookiemonste-r.netlify.app/employee
+
+Work In Progress:PART 3 WIP!!!  
