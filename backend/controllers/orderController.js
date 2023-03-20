@@ -2,14 +2,14 @@ const Order = require('../models/Orderformat')
 const mongoose= require('mongoose')
 //get new orders only 
 const getNew =async(req,res)=>{
-    const orders = await Order.find({status:false}.sort({Createdat:-1}))
+    const orders = await Order.find({status:false}).sort({Createdat:-1});
     res.status(200).json(orders);
 }
 
 
 //get done orders only
 const getDone=async(req,res)=>{
-    const orders = await Order.find({status:true}.sort({Createdat:-1}))
+    const orders = await Order.find({status:true}).sort({Createdat:-1});
     res.status(200).json(orders);
 }
 
