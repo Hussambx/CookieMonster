@@ -18,13 +18,14 @@ function App() {
   const[cart,setCart] = useState([]); //This state keeps track of the persons cart(Items that they have addded to the order so far )
   const[drink,setDrink] = useState(''); //This state keeps track of the selected drink IMG 
   const [subtotal,setSubtotal] = useState(0);//This state keeps track of the subtotal of the given order 
-  const[ordernum,setNumber] = useState(0) //This state tracks the customers order number 
+  const[ordernum,setNumber] = useState(Math.round(Math.random(0,100)*200)) //This state tracks the customers order number 
   const delay = ms => new Promise(res => setTimeout(res, ms));; //Adds a delay 
   var tempclone;
   var tempclone2
   //Keeps track of what UI element should be displayed 
   function changeview(num){
     setUi(prevstate=>num)
+   
     //num==0?setUi(prevstate=>1):setUi(prevstate=>5)
    // num==1?console.log(secmenu):console.log(secmenu)
   }
@@ -188,7 +189,7 @@ function App() {
 
   //This function is called when the order is confirmed, as of right now it simply just clears the cart but once the backend is in place it will actually process the order
   function orderConfirm(){
-    setNumber(prevstate=> Math.round(Math.random(0,100)*200))
+    
     newOrder();
     setCart(prevstate=>[])
     changeview(6);
