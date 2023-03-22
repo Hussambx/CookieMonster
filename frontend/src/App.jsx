@@ -264,6 +264,7 @@ function App() {
           <h2 id="largetext">Thanks for ordering!</h2>
             <h2>Order Number:</h2>
             <h2>#{ordernum}</h2>
+            <a href='https://cookiemonste-r.netlify.app/employee'><h2>Visit the employee facing UI:</h2> </a>
           </div>}
     </>
   )

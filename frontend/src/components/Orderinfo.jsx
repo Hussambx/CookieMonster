@@ -38,7 +38,6 @@ export default function Orderinfo (props){
                
                 if(props.data.order[i][j].name == "Water"){
                     water++;
-                    console.log("Adasda");
                 }else if (props.data.order[i][j].name=="Chocolate Milk"){
                     cmilk++
                 }else if (props.data.order[i][j].name=="Milk"){
@@ -63,13 +62,13 @@ export default function Orderinfo (props){
     return(
         <div className="testerx">
             <h2 style={{color:'blue'}}>#{props.data.ordernum}</h2>
-        <div style={{display:'flex',justifyContent:'center',gap:'15px'}}>
+        <div style={{display:'flex',justifyContent:'center',gap:'15px', flexWrap:'wrap'}}>
     
       {orderitems}
       <div>
-      {water>0 && <h2>Water x{water}</h2>}
-      {wmilk>0 && <h2>Milk x{wmilk}</h2>}
-      {cmilk>0 && <h2>Chocolate Milk x{cmilk}</h2>}
+      {water>0 && <h2 style={{textAlign:'left'}}>Water x{water}</h2>}
+      {wmilk>0 && <h2 style={{textAlign:'left'}}>Milk x{wmilk}</h2>}
+      {cmilk>0 && <h2 style={{textAlign:'left'}}> Choc Milk x{cmilk}</h2>}
 
 
       </div>

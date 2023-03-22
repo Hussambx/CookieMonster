@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Orderinfo from "./components/Orderinfo";
+import Analytics from "./components/Analytics";
 //This will be the main jsx file for the Employee facing frontend 
 
 export default function Employee(){
-    const [activeui, setUi] = useState(0);  //Keeps track of what type of data that should be showen, Complete/Incomplete or ALL orders 
+    const [activeui, setUi] = useState(3);  //Keeps track of what type of data that should be showen, Complete/Incomplete or ALL orders 
     const[orderdata,setData] = useState([]); //Keeps track of all the order data fetched from the data base 
-    const[apistring,setString] = useState("https://cookiemonster.fly.dev/NEW"); //API String used for Data 
+    const[apistring,setString] = useState("https://cookiemonster.fly.dev/ALL"); //API String used for Data 
     const[render,setRender] = useState(false); //Forces Re-Fetch of data 
     function changetype(e){
     
@@ -14,7 +15,7 @@ export default function Employee(){
             setString(prevstate=>"https://cookiemonster.fly.dev/NEW");
         }else if(e.target.name==1){ //GETS ONLY FINISHED ORDERS 
             setString(prevstate=>"https://cookiemonster.fly.dev/DONE");
-        }else{  //GETS ALL ORDERS 
+        }else if(e.target.name==2 || e.target.name==3){  //GETS ALL ORDERS 
             setString(prevstate=>"https://cookiemonster.fly.dev/ALL");
         }
         setUi(prevstate=>e.target.name);
@@ -34,7 +35,7 @@ export default function Employee(){
         getOrders()
     }, [activeui,render])
     
-    console.log(orderdata);
+
 
     
     const orders = orderdata.map(orderx=>{
@@ -43,9 +44,11 @@ export default function Employee(){
             data = {orderx}
             rerender = {rerender}
           />
+          
         )
       })
 
+    
 
     return(
         <>
@@ -54,17 +57,19 @@ export default function Employee(){
         <button onClick={changetype} name="0" style={{backgroundColor:activeui==0?"grey":"white"}}>New</button>
         <button onClick={changetype} name="1" style={{backgroundColor:activeui==1?"grey":"white"}}>Complete</button>
         <button onClick={changetype} name="2" style={{backgroundColor:activeui==2?"grey":"white"}}>All Orders</button>
-
+        <button onClick={changetype} name="3" style={{backgroundColor:activeui==3?"grey":"white"}}>Analytics</button>
         
 
         </div>
        <div className="orderlist" style={{flexDirection:activeui==0?'column':'column-reverse'}}>
         {orderdata.length==0&& <h2>No New Orders Found..</h2>}
-       {orders}
-
+       {activeui!=3 && orders}
+        
 
        </div>
-      
+       {activeui==3 && <Analytics
+       data={orderdata}
+       />}
         
         
         </>
